@@ -27,7 +27,6 @@ import net.sf.odinms.server.maps.pvp.PvPLibrary;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.Pair;
 import net.sf.odinms.tools.data.input.LittleEndianAccessor;
-import net.sf.odinms.tools.logging.LogSystem;
 
 public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandler {
     //private static Logger log = LoggerFactory.getLogger(AbstractDealDamageHandler.class);
@@ -155,11 +154,9 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                         player.getCheatTracker().registerOffense(CheatingOffense.SAME_DAMAGE, dmgCheck + " times: " + totDamageToOneMonster);
                     }
                 }
-                if (totDamageToOneMonster >= 10000000) {
-                    LogSystem.printLog(LogSystem.Cheaters + player.getName() + ".txt", "Dealt " + totDamageToOneMonster + " to monster " + monster.getId() +"."
-                            + "Level: " + player.getLevel() 
-                            + "Job: " + player.getJob().getId());
-                    //AutobanManager.getInstance().autoban(player.getClient(),"XSource| " + player.getName() + " dealt " + totDamageToOneMonster + " to monster " + monster.getId() + ".");
+                if (totDamageToOneMonster >= 100000000) {
+                    AutobanManager.getInstance().autoban
+                    (player.getClient(),"XSource| " + player.getName() + " dealt " + totDamageToOneMonster + " to monster " + monster.getId() + ".");
                 }
 
                 double distance = player.getPosition().distanceSq(monster.getPosition());

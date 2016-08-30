@@ -109,12 +109,14 @@ public class Enums {
         Cash_Pet_Binoculars(-127),
         Cash_Pet_Magic_Scales(-128),
         Cash_Pet_Item_Ignore(-129);
-        final short code;
+        final byte code;
         
         private Equipment(int code) {
-            this.code = (short) code;
+            this.code = (byte) code;
         }
-        
+        public byte getCode() {
+            return code;
+        }
     }
     
 }

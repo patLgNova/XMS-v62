@@ -23,7 +23,13 @@ public class UseItemHandler extends AbstractMaplePacketHandler {
         byte slot = (byte) slea.readShort();
         int itemId = slea.readInt();
         IItem toUse = c.getPlayer().getInventory(MapleInventoryType.USE).getItem(slot);
-        if (toUse != null && toUse.getQuantity() > 0) {
+        if (itemId == 2022118) {
+            c.getPlayer().dropMessage(1, "Please keep this item for scrolling purposes. Gives you 100% scroll rate.");
+            c.getSession().write(MaplePacketCreator.enableActions());
+            return;
+        } else if (itemId == 2022065) {
+            NPCScriptManager.getInstance().start(c, 9010000, "JobChanger", null);
+        } else if (toUse != null && toUse.getQuantity() > 0) {
             if (toUse.getItemId() != itemId) {
                 return;
             }

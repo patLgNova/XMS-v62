@@ -80,7 +80,7 @@ public class ScrollHandler extends AbstractMaplePacketHandler {
             scrollSuccess = IEquip.ScrollResult.SUCCESS;
         }
         useInventory.removeItem(scroll.getPosition(), (short) 1, false);
-        if (whiteScroll & wscroll != null) {
+        if (whiteScroll) {
             useInventory.removeItem(wscroll.getPosition(), (short) 1, false);
             if (wscroll.getQuantity() < 1) {
                 c.getSession().write(MaplePacketCreator.clearInventoryItem(MapleInventoryType.USE, wscroll.getPosition(), false));

@@ -31,6 +31,7 @@ public class LogSystem {
             GMLog = "GMLog/",
             Damage = "Damage/",
             Login = "Login/",
+            Cheaters = "Cheaters/",
             TrackedItems = "trackedItems/",
             TrackedDLogin = "Dlogin/",
             MoreTalkLog = "MoreTalkLog/",

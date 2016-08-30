@@ -775,12 +775,20 @@ public class MapleItemInformationProvider {
 
     public boolean isBullet(int itemId) {
         int id = itemId / 10000;
-        return id == 233;
+        if (id == 233) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isRechargable(int itemId) {
         int id = itemId / 10000;
-        return id == 233 || id == 207;
+        if (id == 233 || id == 207) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isOverall(int itemId) {

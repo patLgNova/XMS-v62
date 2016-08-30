@@ -11,7 +11,9 @@ import net.sf.odinms.client.MapleBuffStat;
 import net.sf.odinms.client.MapleCharacter;
 import net.sf.odinms.client.MapleClient;
 import net.sf.odinms.client.MapleInventoryType;
+import net.sf.odinms.client.constants.Enums;
 import net.sf.odinms.tools.MaplePacketCreator;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class MapleInventoryManipulator {
 
@@ -41,7 +43,8 @@ public class MapleInventoryManipulator {
 
     public static boolean addById(MapleClient c, int itemId, short quantity, String owner, int petid) {
         if (quantity >= 4000 || quantity < 0) {
-            AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + itemId);
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity);
+            //AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + itemId);
             return false;
         }
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
@@ -139,7 +142,8 @@ public class MapleInventoryManipulator {
         }
         short quantity = item.getQuantity();
         if (quantity >= 4000 || quantity < 0) {
-            AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + item.getItemId());
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity);
+           /// AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + item.getItemId());
             return false;
         }
         if (!type.equals(MapleInventoryType.EQUIP)) {
@@ -327,7 +331,6 @@ public class MapleInventoryManipulator {
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
         Equip source = (Equip) c.getPlayer().getInventory(MapleInventoryType.EQUIP).getItem(src);
         Equip target = (Equip) c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem(dst);
-        c.getPlayer().dropMessage("You just equipped an item into slot: " + dst + ".\n" +source.toString());
         if (source == null) {
             return;
         }
@@ -338,7 +341,7 @@ public class MapleInventoryManipulator {
                 case 1062007: // Wizet Plain Suit Pants
                 case 1322013: // Wizet Secret Agent Suitcase
                     removeAllById(c, source.getItemId(), false);
-                    c.getPlayer().dropMessage(1, "You're not a GM");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Equipped GM items without being a GM.");
                     return;
             }
         }
@@ -349,7 +352,7 @@ public class MapleInventoryManipulator {
         }
         if (dst == -6) {
             // unequip the overall
-            IItem top = c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem((byte) -5);
+            IItem top = c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem(Enums.Equipment.Top.getCode());
             if (top != null && ii.isOverall(top.getItemId())) {
                 if (c.getPlayer().getInventory(MapleInventoryType.EQUIP).isFull()) {
                     c.getSession().write(MaplePacketCreator.getInventoryFull());
@@ -360,15 +363,15 @@ public class MapleInventoryManipulator {
             }
         } else if (dst == -5) {
             // unequip the bottom and top
-            IItem top = c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem((byte) -5);
-            IItem bottom = c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem((byte) -6);
+            IItem top = c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem(Enums.Equipment.Top.getCode());
+            IItem bottom = c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem(Enums.Equipment.Bottom.getCode());
             if (top != null && ii.isOverall(source.getItemId())) {
                 if (c.getPlayer().getInventory(MapleInventoryType.EQUIP).isFull(bottom != null && ii.isOverall(source.getItemId()) ? 1 : 0)) {
                     c.getSession().write(MaplePacketCreator.getInventoryFull());
                     c.getSession().write(MaplePacketCreator.getShowInventoryFull());
                     return;
                 }
-                unequip(c, (byte) -5, c.getPlayer().getInventory(MapleInventoryType.EQUIP).getNextFreeSlot());
+                unequip(c, Enums.Equipment.Top.getCode(), c.getPlayer().getInventory(MapleInventoryType.EQUIP).getNextFreeSlot());
             }
             if (bottom != null && ii.isOverall(source.getItemId())) {
                 if (c.getPlayer().getInventory(MapleInventoryType.EQUIP).isFull()) {
@@ -376,7 +379,7 @@ public class MapleInventoryManipulator {
                     c.getSession().write(MaplePacketCreator.getShowInventoryFull());
                     return;
                 }
-                unequip(c, (byte) -6, c.getPlayer().getInventory(MapleInventoryType.EQUIP).getNextFreeSlot());
+                unequip(c, Enums.Equipment.Bottom.getCode(), c.getPlayer().getInventory(MapleInventoryType.EQUIP).getNextFreeSlot());
             }
         } else if (dst == -10) {
             // check if weapon is two-handed
@@ -425,7 +428,11 @@ public class MapleInventoryManipulator {
         Equip source = (Equip) c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem(src);
         Equip target = (Equip) c.getPlayer().getInventory(MapleInventoryType.EQUIP).getItem(dst);
         if (dst < 0) {
-            System.out.println("Unequipping to negative slot. (" + c.getPlayer().getName() + ": " + src + " -> " + dst);
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Unequipped an item to a negative slot. \n"
+                    + "Item was: " + source.getItemId() + "\n" 
+                    + "Item source slot was: " + src + "\n" 
+                    + "Destination slot was: " + dst);
+            //System.out.println("Unequipping to negative slot. (" + c.getPlayer().getName() + ": " + src + " -> " + dst);
         }
         if (source == null) {
             return;
