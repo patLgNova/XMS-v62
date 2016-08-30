@@ -11,6 +11,7 @@ import net.sf.odinms.net.AbstractMaplePacketHandler;
 import net.sf.odinms.server.MapleItemInformationProvider;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class CreateCharHandler extends AbstractMaplePacketHandler {
 
@@ -122,7 +123,7 @@ public class CreateCharHandler extends AbstractMaplePacketHandler {
             newchar.saveToDB(false, true);
             c.getSession().write(MaplePacketCreator.addNewCharEntry(newchar, charok));
         } else {
-            System.out.println(MapleClient.getLogMessage(c, "Trying to create a character with a name: " + name));
+            LogSystem.printLog(LogSystem.Cheaters + c.getAccountName() + ".txt", "Trying to create a character with illegal name: " + name);
         }
     }
 }

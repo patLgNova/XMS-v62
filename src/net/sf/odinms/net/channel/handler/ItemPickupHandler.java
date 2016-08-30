@@ -14,13 +14,11 @@ import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
 
 public class ItemPickupHandler extends AbstractMaplePacketHandler {
 
-    /** Creates a new instance of ItemPickupHandler */
     public ItemPickupHandler() {
     }
 
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         c.getPlayer().resetAfkTime();
-        @SuppressWarnings("unused")
         byte mode = slea.readByte();
         slea.readInt();
         slea.readInt();

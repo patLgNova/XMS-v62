@@ -11,8 +11,6 @@ public class AllianceOperationHandler extends AbstractMaplePacketHandler {
 
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        System.out.println(slea.toString());
-
         MapleAlliance alliance = null;
         if (c.getPlayer().getGuild() != null && c.getPlayer().getGuild().getAllianceId() > 0) {
             try {

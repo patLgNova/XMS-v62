@@ -158,7 +158,7 @@ public abstract class AbstractDealDamageHandler extends AbstractMaplePacketHandl
                 if (totDamageToOneMonster >= 10000000) {
                     LogSystem.printLog(LogSystem.Cheaters + player.getName() + ".txt", "Dealt " + totDamageToOneMonster + " to monster " + monster.getId() +"."
                             + "Level: " + player.getLevel() 
-                            + "Job: " + player.getJob().getId());
+                            + "Job: " + player.getJob().getId() +"\n");
                     //AutobanManager.getInstance().autoban(player.getClient(),"XSource| " + player.getName() + " dealt " + totDamageToOneMonster + " to monster " + monster.getId() + ".");
                 }
 

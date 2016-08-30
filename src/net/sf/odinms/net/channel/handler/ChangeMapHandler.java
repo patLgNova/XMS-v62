@@ -72,12 +72,6 @@ public class ChangeMapHandler extends AbstractMaplePacketHandler {
             } else {
                 if (portal != null) {
                     portal.enterPortal(c);
-                    /*
-                    if (player.getClan() == -1 && !c.isGuest()) {
-                        for (int i = 0; i < 3; i++) {
-                            player.dropMessage(6, "You have yet to join a clan ! Type @clan to join a clan..");
-                        }
-                    }*/
                 } else {
                     c.getSession().write(MaplePacketCreator.enableActions());
                     System.out.println("Portal " + startwp + " not found on map " + player.getMap().getId());

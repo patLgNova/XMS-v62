@@ -14,6 +14,7 @@ import net.sf.odinms.server.movement.LifeMovementFragment;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.Pair;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +28,6 @@ public class MoveLifeHandler extends AbstractMovementPacketHandler {
         short moveid = slea.readShort();
         MapleMapObject mmo = c.getPlayer().getMap().getMapObject(objectid);
         if (mmo == null || mmo.getType() != MapleMapObjectType.MONSTER) {
-            /*if (mmo != null) {
-            log.warn("[dc] Player {} is trying to move something which is not a monster. It is a {}.", new Object[] {
-            c.getPlayer().getName(), c.getPlayer().getMap().getMapObject(objectid).getClass().getCanonicalName() });
-            }*/
             return;
         }
         MapleMonster monster = (MapleMonster) mmo;
@@ -40,7 +37,6 @@ public class MoveLifeHandler extends AbstractMovementPacketHandler {
         int skill_1 = slea.readByte() & 0xFF;
         int skill_2 = slea.readByte();
         int skill_3 = slea.readByte();
-        @SuppressWarnings("unused")
         int skill_4 = slea.readByte();
         MobSkill toUse = null;
         Random rand = new Random();
@@ -89,7 +85,7 @@ public class MoveLifeHandler extends AbstractMovementPacketHandler {
         }
         if (res != null) {
             if (slea.available() != 9) {
-                log.warn("slea.available != 9 (movement parsing error)");
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Player was possibly vaccing");
                 return;
             }
             MaplePacket packet = MaplePacketCreator.moveMonster(skillByte, skill, skill_1, skill_2, skill_3, objectid, startPos, res);

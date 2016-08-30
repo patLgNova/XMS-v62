@@ -3,8 +3,58 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ScrollHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/GuildOperationHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/DeleteCharHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ChangeMapSpecialHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ChangeChannelHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/CharSelectedHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/EnergyOrbDamageHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/tools/MaplePacketCreator.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ItemSortHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/CharlistRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/MesoDropHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/FaceExpressionHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ItemMoveHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/MessengerHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/CharInfoRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/CancelItemEffectHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/CheckCharNameHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/AfterLoginHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/CancelChairHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/HealOvertimeHandler.java</file>
             <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/TakeDamageHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/GiveFameHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DueyHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ScrollHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/ServerlistRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/RelogRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/PickCharHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/MTSHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/InnerPortalHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/KeymapChangeHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/ViewCharHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DistributeAPHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DenyPartyRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/HiredMerchantRequest.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/BuyCSItemHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/AllianceOperationHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DistributeSPHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/MobDamageMobHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/LoginPasswordHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DoorHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/CloseRangeDamageHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/ServerStatusRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/client/MapleCharacter.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/PlayerDCHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/MoveLifeHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DenyGuildRequestHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/DamageSummonHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ItemPickupHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/CloseChalkboardHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/PetFoodHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/CreateCharHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/channel/handler/ChangeMapHandler.java</file>
+            <file>file:/C:/Users/patri/OneDrive/Documents/XMS/XMS-v62/src/net/sf/odinms/net/login/handler/GuestLoginHandler.java</file>
         </group>
     </open-files>
 </project-private>

@@ -4,6 +4,7 @@ import net.sf.odinms.client.MapleClient;
 import net.sf.odinms.net.AbstractMaplePacketHandler;
 import net.sf.odinms.server.AutobanManager;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class HealOvertimeHandler extends AbstractMaplePacketHandler {
 
@@ -15,8 +16,7 @@ public class HealOvertimeHandler extends AbstractMaplePacketHandler {
         int healHP = slea.readShort();
         if (healHP != 0) {
             if (healHP > 1000) {
-                AutobanManager.getInstance().autoban
-                (c.getPlayer().getClient(), "XSource| " + c.getPlayer().getName() + " healed for " + healHP + "/HP in map: " + c.getPlayer().getMapId() + ".");
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to heal for " +healHP+ " in map " + c.getPlayer().getMapId() + ".\n");
                 return;
             }
             c.getPlayer().addHP(healHP);
@@ -24,8 +24,7 @@ public class HealOvertimeHandler extends AbstractMaplePacketHandler {
         int healMP = slea.readShort();
         if (healMP != 0) {
             if (healMP > 1000) {
-                AutobanManager.getInstance().autoban
-                (c.getPlayer().getClient(), "XSource| " + c.getPlayer().getName() + " healed for " + healMP + "/MP in map: " + c.getPlayer().getMapId() + ".");
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to heal for " +healMP+ " in map " + c.getPlayer().getMapId() + ".\n");
                 return;
             }
             c.getPlayer().addMP(healMP);

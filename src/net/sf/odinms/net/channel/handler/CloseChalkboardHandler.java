@@ -9,6 +9,10 @@ public class CloseChalkboardHandler extends AbstractMaplePacketHandler {
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         c.getPlayer().resetAfkTime();
-        c.getPlayer().setChalkboard(null);
+        if (c.getPlayer().getChalkboard() != null) {
+            c.getPlayer().setChalkboard(null);
+        } else {
+            c.getPlayer().dropMessage("Your chalkboard is already closed.");
+        }
     }
 }

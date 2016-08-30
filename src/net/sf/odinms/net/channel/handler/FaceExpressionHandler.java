@@ -9,10 +9,9 @@ import net.sf.odinms.server.MapleItemInformationProvider;
 import net.sf.odinms.server.maps.FakeCharacter;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class FaceExpressionHandler extends AbstractMaplePacketHandler {
-
-    //private static Logger log = LoggerFactory.getLogger(FaceExpressionHandler.class);
 
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
@@ -23,13 +22,10 @@ public class FaceExpressionHandler extends AbstractMaplePacketHandler {
             MapleInventoryType type = MapleItemInformationProvider.getInstance().getInventoryType(emoteid);
             MapleInventory iv = c.getPlayer().getInventory(type);
             if (iv.findById(emoteid) == null) {
-                //log.info("[h4x] Player {} is using a face expression he does not have: {}", c.getPlayer().getName(), Integer.valueOf(emoteid));
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to use a face expression: " + emoteid + " while not having it.\n");
                 c.getPlayer().getCheatTracker().registerOffense(CheatingOffense.USING_UNAVAILABLE_ITEM, Integer.toString(emoteid));
                 return;
             }
-        }
-        for (FakeCharacter ch : c.getPlayer().getFakeChars()) {
-            c.getPlayer().getMap().broadcastMessage(ch.getFakeChar(), MaplePacketCreator.facialExpression(ch.getFakeChar(), emote), false);
         }
         c.getPlayer().getMap().broadcastMessage(c.getPlayer(), MaplePacketCreator.facialExpression(c.getPlayer(), emote), false);
     }

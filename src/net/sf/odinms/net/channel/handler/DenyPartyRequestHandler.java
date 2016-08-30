@@ -13,7 +13,6 @@ public class DenyPartyRequestHandler extends AbstractMaplePacketHandler {
         c.getPlayer().resetAfkTime();
         slea.readByte();
         String from = slea.readMapleAsciiString();
-        @SuppressWarnings("unused")
         String to = slea.readMapleAsciiString();
         MapleCharacter cfrom = c.getChannelServer().getPlayerStorage().getCharacterByName(from);
         if (cfrom != null) {

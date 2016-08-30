@@ -17,7 +17,7 @@ public class GeneralchatHandler extends AbstractMaplePacketHandler {
         String text = slea.readMapleAsciiString();
         int show = slea.readByte();
         if (!(c.getPlayer().isGM()) && text.length() > 100) { // 70 = max text for client. remove this if u have edit the client
-            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Text length of: " + text.length() + ". Max length is 70.");
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Text length of: " + text.length() + ". Max length is 70.\n");
             //AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| " + c.getPlayer().getName() + " had infinite text with a text length of " + text.length() + ".");
         } else {
             if (!CommandProcessor.getInstance().processCommand(c, text) && c.getPlayer().getCanTalk() && !PublicChatHandler.doChat(c, text)) {

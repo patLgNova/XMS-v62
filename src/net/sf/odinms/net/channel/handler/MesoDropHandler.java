@@ -4,6 +4,7 @@ import net.sf.odinms.client.MapleClient;
 import net.sf.odinms.net.AbstractMaplePacketHandler;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class MesoDropHandler extends AbstractMaplePacketHandler {
 
@@ -23,7 +24,7 @@ public class MesoDropHandler extends AbstractMaplePacketHandler {
             c.getPlayer().getMap().spawnMesoDrop(meso, meso, c.getPlayer().getPosition(), c.getPlayer(), c.getPlayer(), false);
         } else {
             c.getPlayer().setMeso(0);
-            return;
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Player attempted to drop an illegal amount of mesos. Mesos: " + meso);
         }
     }
 }

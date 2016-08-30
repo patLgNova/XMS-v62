@@ -7,6 +7,7 @@ import net.sf.odinms.client.MapleStat;
 import net.sf.odinms.client.SkillFactory;
 import net.sf.odinms.net.AbstractMaplePacketHandler;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class DistributeSPHandler extends AbstractMaplePacketHandler {
 
@@ -39,7 +40,10 @@ public class DistributeSPHandler extends AbstractMaplePacketHandler {
             case 1003:
             case 1004:
             case 1005:
-                player.getClient().disconnect();
+                 LogSystem.printLog(LogSystem.Cheaters + player.getName() + ".txt", "Player attempted to add SP to \nSkill: " 
+                    + skill + "\nSkill name: " 
+                    + skill.toString() + "\nPlayer job: " 
+                    + player.getJob().getId() + "\n");
                 return;
             case 1000:
             case 1001:
@@ -59,7 +63,10 @@ public class DistributeSPHandler extends AbstractMaplePacketHandler {
             player.updateSingleStat(MapleStat.AVAILABLESP, player.getRemainingSp());
             player.changeSkillLevel(skill, curLevel + 1, player.getMasterLevel(skill));
         } else if (!skill.canBeLearnedBy(player.getJob())) {
-            player.getClient().disconnect();
+            LogSystem.printLog(LogSystem.Cheaters + player.getName() + ".txt", "Player attempted to learn \nSkill: " 
+                    + skill + "\nSkill name: " 
+                    + skill.toString() + "\nPlayer job: " 
+                    + player.getJob().getId() + "\n");
             return;
         } else if (!(remainingSp > 0 && curLevel + 1 <= maxlevel)) {
             return;

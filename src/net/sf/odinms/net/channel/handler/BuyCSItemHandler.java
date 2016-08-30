@@ -13,6 +13,7 @@ import net.sf.odinms.server.CashItemInfo;
 import net.sf.odinms.server.MapleInventoryManipulator;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class BuyCSItemHandler extends AbstractMaplePacketHandler {
 
@@ -33,7 +34,6 @@ public class BuyCSItemHandler extends AbstractMaplePacketHandler {
 
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        System.out.println(slea.toString());
         int action = slea.readByte();
         if (action == 3) {
             slea.skip(1);
@@ -45,6 +45,7 @@ public class BuyCSItemHandler extends AbstractMaplePacketHandler {
                 c.getPlayer().modifyCSPoints(useNX, -item.getPrice());
             } else {
                 c.getSession().write(MaplePacketCreator.enableActions());
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Trying to purchase an item from the Cash Shop without the required amount of NX.");
                 AutobanManager.getInstance().autoban(c, "Trying to purchase from the CS when they have no NX.");
                 return;
             }

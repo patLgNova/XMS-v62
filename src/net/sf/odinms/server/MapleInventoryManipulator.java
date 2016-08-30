@@ -43,7 +43,7 @@ public class MapleInventoryManipulator {
 
     public static boolean addById(MapleClient c, int itemId, short quantity, String owner, int petid) {
         if (quantity >= 4000 || quantity < 0) {
-            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity);
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity + "\n");
             //AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + itemId);
             return false;
         }
@@ -142,7 +142,7 @@ public class MapleInventoryManipulator {
         }
         short quantity = item.getQuantity();
         if (quantity >= 4000 || quantity < 0) {
-            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity);
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity + "\n");
            /// AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + item.getItemId());
             return false;
         }
@@ -341,7 +341,7 @@ public class MapleInventoryManipulator {
                 case 1062007: // Wizet Plain Suit Pants
                 case 1322013: // Wizet Secret Agent Suitcase
                     removeAllById(c, source.getItemId(), false);
-                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Equipped GM items without being a GM.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Equipped GM items without being a GM.\n");
                     return;
             }
         }

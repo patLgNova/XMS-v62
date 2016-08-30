@@ -28,28 +28,28 @@ public class DistributeAPHandler extends AbstractMaplePacketHandler {
         if (c.getPlayer().getRemainingAp() > 0) {
             switch (update) {
                 case 64: // Str
-                    if (c.getPlayer().getStr() >= 30000) {
+                    if (c.getPlayer().getStr() >= 999) {
                         return;
                     }
                     c.getPlayer().setStr(c.getPlayer().getStr() + 1);
                     statupdate.add(new Pair<MapleStat, Integer>(MapleStat.STR, c.getPlayer().getStr()));
                     break;
                 case 128: // Dex
-                    if (c.getPlayer().getDex() >= 30000) {
+                    if (c.getPlayer().getDex() >= 999) {
                         return;
                     }
                     c.getPlayer().setDex(c.getPlayer().getDex() + 1);
                     statupdate.add(new Pair<MapleStat, Integer>(MapleStat.DEX, c.getPlayer().getDex()));
                     break;
                 case 256: // Int
-                    if (c.getPlayer().getInt() >= 30000) {
+                    if (c.getPlayer().getInt() >= 999) {
                         return;
                     }
                     c.getPlayer().setInt(c.getPlayer().getInt() + 1);
                     statupdate.add(new Pair<MapleStat, Integer>(MapleStat.INT, c.getPlayer().getInt()));
                     break;
                 case 512: // Luk
-                    if (c.getPlayer().getLuk() >= 30000) {
+                    if (c.getPlayer().getLuk() >= 999) {
                         return;
                     }
                     c.getPlayer().setLuk(c.getPlayer().getLuk() + 1);
@@ -130,7 +130,7 @@ public class DistributeAPHandler extends AbstractMaplePacketHandler {
             c.getSession().write(MaplePacketCreator.updatePlayerStats(statupdate, true));
         } else {
             //AutobanManager.getInstance().addPoints(c, 334, 120000, "Trying to distribute AP to " + update + " without having any");
-            log.info("[h4x] Player {} is distributing AP to {} without having any", c.getPlayer().getName(), Integer.valueOf(update));
+            //log.info("[h4x] Player {} is distributing AP to {} without having any", c.getPlayer().getName(), Integer.valueOf(update));
         }
     }
 

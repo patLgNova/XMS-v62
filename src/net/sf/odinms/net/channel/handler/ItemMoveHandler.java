@@ -6,11 +6,10 @@ import net.sf.odinms.net.AbstractMaplePacketHandler;
 import net.sf.odinms.server.AutobanManager;
 import net.sf.odinms.server.MapleInventoryManipulator;
 import net.sf.odinms.tools.data.input.SeekableLittleEndianAccessor;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class ItemMoveHandler extends AbstractMaplePacketHandler {
-    // private static Logger log = LoggerFactory.getLogger(ItemMoveHandler.class);
 
-    /** Creates a new instance of ItemMoveHandler */
     public ItemMoveHandler() {
     }
 
@@ -31,7 +30,7 @@ public class ItemMoveHandler extends AbstractMaplePacketHandler {
                 return;
             }
             if (checkq > 4000 || checkq < 1) {
-                AutobanManager.getInstance().autoban(c, "XSource| Drop-dupe attemp item ("+c.getPlayer().getInventory(type).getItem(src).getItemId()+").");
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to drop-dupe ItemID: "+ c.getPlayer().getInventory(type).getItem(src).getItemId() + "\n");
                 return;
             }
             MapleInventoryManipulator.drop(c, type, src, quantity);

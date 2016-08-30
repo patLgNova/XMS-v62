@@ -8,6 +8,7 @@ import java.util.Iterator;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.client.MapleCharacter;
 import net.sf.odinms.client.MaplePet;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class GuildOperationHandler extends AbstractMaplePacketHandler {
 
@@ -109,7 +110,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
             case 0x05:
                 // Invitation.
                 if (mc.getGuildId() <= 0 || mc.getGuildRank() > 2) { // 1 = guild master, 2 = jr.
-                    System.out.println("[hax] " + mc.getName() + " used guild invitation when s/he isn't allowed.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Using guild invitation powers when they shouldn't be able to.\n");
                     return;
                 }
                 String name = slea.readMapleAsciiString();
@@ -124,17 +125,15 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
                 break;
             case 0x06:
                 // Accepted guild invitation.
-                System.out.println(slea.toString());
-
                 if (mc.getGuildId() > 0) {
-                    System.out.println("[hax] " + mc.getName() + " attempted to join a guild when s/he is already in one.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempting to join a guild when already in one.\n");
                     return;
                 }
                 gid = slea.readInt();
                 int cid = slea.readInt();
 
                 if (cid != mc.getId()) {
-                    System.out.println("[hax] " + mc.getName() + " attempted to join a guild with a different character id.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to join a guild with a different character ID.\n");
                     return;
                 }
                 name = mc.getName().toLowerCase();
@@ -149,7 +148,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
                     }
                 }
                 if (!bOnList) {
-                    System.out.println("[hax] " + mc.getName() + " is trying to join a guild that never invited him/her (or that the invitation has expired)");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to join a guild that never sent an invite. Or invite expired.\n");
                     return;
                 }
                 mc.setGuildId(gid);
@@ -177,7 +176,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
                 cid = slea.readInt();
                 name = slea.readMapleAsciiString();
                 if (cid != mc.getId() || !name.equals(mc.getName()) || mc.getGuildId() <= 0) {
-                    System.out.println("[hax] " + mc.getName() + " tried to quit guild under the name \"" + name + "\" and current guild id of " + mc.getGuildId() + ".");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to quit a guild using name: " + name +"\n");
                     return;
                 }
                 try {
@@ -197,7 +196,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
                 cid = slea.readInt();
                 name = slea.readMapleAsciiString();
                 if (mc.getGuildRank() > 2 || mc.getGuildId() <= 0) {
-                    System.out.println("[hax] " + mc.getName() + " is trying to expel without rank 1 or 2.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to expel a player without proper privileges.\n");
                     return;
                 }
                 try {
@@ -211,7 +210,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
             case 0x0d:
                 // Guild rank titles change.
                 if (mc.getGuildId() <= 0 || mc.getGuildRank() != 1) {
-                    System.out.println("[hax] " + mc.getName() + " tried to change guild rank titles when s/he does not have permission.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to change guild rank titles without proper privileges.\n");
                     return;
                 }
                 String ranks[] = new String[5];
@@ -230,7 +229,6 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
                 cid = slea.readInt();
                 byte newRank = slea.readByte();
                 if (mc.getGuildRank() > 2 || (newRank <= 2 && mc.getGuildRank() != 1) || mc.getGuildId() <= 0) {
-                    System.out.println("[hax] " + mc.getName() + " is trying to change rank outside of his/her permissions.");
                     return;
                 }
                 if (newRank <= 1 || newRank > 5)
@@ -246,7 +244,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
             case 0x0f:
                 // Guild emblem change.
                 if (mc.getGuildId() <= 0 || mc.getGuildRank() != 1 || mc.getMapId() != 200000301) {
-                    System.out.println("[hax] " + mc.getName() + " tried to change guild emblem without being the guild leader.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to change guild emblem in MapID: " + mc.getMapId() + " while not being guild leader.\n");
                     return;
                 }
                 if (mc.getMeso() < MapleGuild.CHANGE_EMBLEM_COST) {
@@ -271,7 +269,7 @@ public class GuildOperationHandler extends AbstractMaplePacketHandler {
             case 0x10:
                 // Guild notice change.
                 if (mc.getGuildId() <= 0 || mc.getGuildRank() > 2) {
-                    System.out.println("[hax] " + mc.getName() + " tried to change guild notice while not in a guild.");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Attempted to change guild notice while not being in a guild.\n");
                     return;
                 }
                 String notice = slea.readMapleAsciiString();

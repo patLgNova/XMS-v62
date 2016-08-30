@@ -15,10 +15,6 @@ public class CharSelectedHandler extends AbstractMaplePacketHandler {
 
     @Override
     public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
-        //final String channelHost = "78.47.155.10"; //dual sailr
-        //final String channelHost = "127.0.0.1";
-        //final String channelHost = "209.160.33.9";
-        //String channelHost = System.getProperty("net.sf.odinms.channelserver.host");
         int charId = slea.readInt();
         String macs = slea.readMapleAsciiString();
         c.updateMacs(macs);

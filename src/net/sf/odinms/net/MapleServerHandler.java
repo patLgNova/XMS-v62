@@ -103,7 +103,7 @@ public class MapleServerHandler extends IoHandlerAdapter {
                 packetHandler.handlePacket(slea, client);
             } catch (Throwable t) {
                 LogSystem.printError(LogSystem.PACKET_HANDLER + packetHandler.getClass().getName() + ".txt", t, 
-                "Error for " + (client.getPlayer() == null ? "" : "player ; " + client.getPlayer() + " on map ; " + client.getPlayer().getMapId() + " - ") + "account ; " + client.getAccountName() + "\r\n" + slea.toString());
+                "Error for " + (client.getPlayer() == null ? "" : "player ; " + client.getPlayer() + " on map ; " + client.getPlayer().getMapId() + " - ") + "account ; " + client.getAccountName() + "\r\n" + slea.toString() + "\n");
             }
         }
     }
