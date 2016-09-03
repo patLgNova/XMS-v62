@@ -26,6 +26,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import net.sf.odinms.client.anticheat.CheatTracker;
 import net.sf.odinms.database.DatabaseException;
@@ -70,6 +71,7 @@ import net.sf.odinms.server.maps.MapleMapObject;
 import net.sf.odinms.server.PlayerInteraction.IPlayerInteractionManager;
 import net.sf.odinms.server.PlayerInteraction.MaplePlayerShop;
 import net.sf.odinms.server.maps.MapleSummon;
+import net.sf.odinms.tools.logging.LogSystem;
 
 public class MapleCharacter extends AbstractAnimatedMapleMapObject implements InventoryContainer {
 
@@ -193,7 +195,10 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject implements In
     private long lastLogin = 0;
     private int ringRequest;
     private boolean hasMerchant;
-
+    /*Date*/
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+    private static final SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
+    
     public MapleCharacter() {
         setStance(0);
         inventory = new MapleInventory[MapleInventoryType.values().length];
@@ -2470,6 +2475,10 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject implements In
         recalcLocalStats();
         silentPartyUpdate();
         guildUpdate();
+         LogSystem.printLog(LogSystem.LevelUp + getName() + ".txt",
+                "["+sdf.format(System.currentTimeMillis())+"]"
+                        + "["+sdf2.format(System.currentTimeMillis()) +"]Reached level " + getLevel() +
+                " on MapID " + getMapId() + ".\n");
     }
 
     public void changeKeybinding(int key, MapleKeyBinding keybinding) {

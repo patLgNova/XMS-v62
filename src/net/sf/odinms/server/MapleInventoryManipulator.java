@@ -1,6 +1,7 @@
 package net.sf.odinms.server;
 
 import java.awt.Point;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 import net.sf.odinms.client.Equip;
@@ -19,6 +20,9 @@ public class MapleInventoryManipulator {
 
     private MapleInventoryManipulator() {
     }
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+    private static final SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
 
     public static boolean addRing(MapleCharacter chr, int itemId, int ringId) {
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
@@ -43,7 +47,9 @@ public class MapleInventoryManipulator {
 
     public static boolean addById(MapleClient c, int itemId, short quantity, String owner, int petid) {
         if (quantity >= 4000 || quantity < 0) {
-            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity + "\n");
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", 
+                    "["+sdf.format(System.currentTimeMillis())+"]"
+                        + "["+sdf2.format(System.currentTimeMillis()) +"]Player attempted to add an illegal quantity of: " + quantity + "\n");
             //AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + itemId);
             return false;
         }
@@ -142,7 +148,8 @@ public class MapleInventoryManipulator {
         }
         short quantity = item.getQuantity();
         if (quantity >= 4000 || quantity < 0) {
-            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt", "Player attempted to add an illegal quantity of: " + quantity + "\n");
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt",  "["+sdf.format(System.currentTimeMillis())+"]"
+                        + "["+sdf2.format(System.currentTimeMillis()) +"]Player attempted to add an illegal quantity of: " + quantity + "\n");
            /// AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + item.getItemId());
             return false;
         }
@@ -341,13 +348,15 @@ public class MapleInventoryManipulator {
                 case 1062007: // Wizet Plain Suit Pants
                 case 1322013: // Wizet Secret Agent Suitcase
                     removeAllById(c, source.getItemId(), false);
-                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Equipped GM items without being a GM.\n");
+                    LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", 
+                             "["+sdf.format(System.currentTimeMillis())+"]"
+                        + "["+sdf2.format(System.currentTimeMillis()) +"]Equipped GM items without being a GM.\n");
                     return;
             }
         }
         if (source.getItemId() == 1812006) {
             removeAllById(c, source.getItemId(), false);
-            c.getPlayer().dropMessage(1, "Magic Scale Has Been Blocked");
+            c.getPlayer().dropMessage(1, "Magic scale is currently disabled.");
             return;
         }
         if (dst == -6) {
@@ -428,7 +437,9 @@ public class MapleInventoryManipulator {
         Equip source = (Equip) c.getPlayer().getInventory(MapleInventoryType.EQUIPPED).getItem(src);
         Equip target = (Equip) c.getPlayer().getInventory(MapleInventoryType.EQUIP).getItem(dst);
         if (dst < 0) {
-            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", "Unequipped an item to a negative slot. \n"
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", 
+                     "["+sdf.format(System.currentTimeMillis())+"]"
+                        + "["+sdf2.format(System.currentTimeMillis()) +"]Unequipped an item to a negative slot. \n"
                     + "Item was: " + source.getItemId() + "\n" 
                     + "Item source slot was: " + src + "\n" 
                     + "Destination slot was: " + dst);
