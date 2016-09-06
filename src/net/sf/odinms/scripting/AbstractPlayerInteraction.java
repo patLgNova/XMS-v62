@@ -98,9 +98,34 @@ public class AbstractPlayerInteraction {
         return iv.getNextFreeSlot() > -1;
     }
 
-    public MapleQuestStatus.Status getQuestStatus(int id) {
-        return getPlayer().getQuest(MapleQuest.getInstance(id)).getStatus();
-    }
+       public void updateQuest(int questid, String data) {
+		MapleQuestStatus status = c.getPlayer().getQuest(MapleQuest.getInstance(questid));
+		status.setStatus(MapleQuestStatus.Status.STARTED);
+		status.setProgress(0, data);//override old if exists
+		c.getPlayer().updateQuest(status);
+	}
+
+	public MapleQuestStatus.Status getQuestStatus(int id) {
+		return c.getPlayer().getQuest(MapleQuest.getInstance(id)).getStatus();
+	}
+       	public int getQuestProgress(int qid) {
+		return Integer.parseInt(getPlayer().getQuest(MapleQuest.getInstance(qid)).getProgress().get(0));
+	}
+                public boolean isQuestCompleted(int quest) {
+		try {
+			return getQuestStatus(quest) == MapleQuestStatus.Status.COMPLETED;
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	public boolean isQuestStarted(int quest) {
+		try {
+			return getQuestStatus(quest) == MapleQuestStatus.Status.STARTED;
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
 
     public boolean gainItem(int id) {
         return gainItem(id, (short) 1);

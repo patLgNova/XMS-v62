@@ -78,13 +78,24 @@ public class MapleClient {
     private Map<String, ScriptEngine> engines = new HashMap<String, ScriptEngine>();
     private ScheduledFuture<?> idleTask = null;
     private int attemptedLogins = 0;
+    private long lastNpcClick;
 
     public MapleClient(MapleAESOFB send, MapleAESOFB receive, IoSession session) {
         this.send = send;
         this.receive = receive;
         this.session = session;
     }
+        public boolean canClickNPC(){
+		return lastNpcClick + 500 < System.currentTimeMillis();
+	}
 
+	public void setClickedNPC(){
+		lastNpcClick = System.currentTimeMillis();
+	}
+
+	public void removeClickedNPC(){
+		lastNpcClick = 0;
+	}
     public MapleAESOFB getReceiveCrypto() {
         return receive;
     }

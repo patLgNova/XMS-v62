@@ -8,9 +8,32 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import net.sf.odinms.server.MapleItemInformationProvider;
+import net.sf.odinms.tools.Pair;
 
 public class MapleInventory implements Iterable<IItem>, InventoryContainer {
-
+    
+    public static boolean checkSpots(MapleCharacter chr, List<Pair<IItem, MapleInventoryType>> items) {
+    	int equipSlot = 0, useSlot = 0, setupSlot = 0, etcSlot = 0, cashSlot = 0;
+    	for (Pair<IItem, MapleInventoryType> item : items) {
+    		if (item.getRight().getType() == MapleInventoryType.EQUIP.getType())
+    			equipSlot++;
+			if (item.getRight().getType() == MapleInventoryType.USE.getType())
+    			useSlot++;
+			if (item.getRight().getType() == MapleInventoryType.SETUP.getType())
+    			setupSlot++;
+			if (item.getRight().getType() == MapleInventoryType.ETC.getType())
+    			etcSlot++;
+			if (item.getRight().getType() == MapleInventoryType.CASH.getType())
+    			cashSlot++;
+    	}
+    	
+    	if (chr.getInventory(MapleInventoryType.EQUIP).isFull(equipSlot - 1)) return false;
+    	else if (chr.getInventory(MapleInventoryType.USE).isFull(useSlot - 1)) return false;
+    	else if (chr.getInventory(MapleInventoryType.SETUP).isFull(setupSlot - 1)) return false;
+    	else if (chr.getInventory(MapleInventoryType.ETC).isFull(etcSlot - 1)) return false;
+    	else if (chr.getInventory(MapleInventoryType.CASH).isFull(cashSlot - 1)) return false;
+    	return true;
+    }
     private Map<Byte, IItem> inventory;
     private byte slotLimit;
     private MapleInventoryType type;

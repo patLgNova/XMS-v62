@@ -1,0 +1,23 @@
+Exception caught by: Character: XiuzSource
+java.lang.NullPointerException
+	at net.sf.odinms.client.MapleCharacter.setOffOnline(MapleCharacter.java:3840)
+	at net.sf.odinms.client.MapleCharacter.cancelEffect(MapleCharacter.java:1185)
+	at net.sf.odinms.client.MapleCharacter.cancelAllBuffs(MapleCharacter.java:1228)
+	at net.sf.odinms.client.MapleClient.disconnect(MapleClient.java:614)
+	at net.sf.odinms.net.MapleServerHandler.sessionClosed(MapleServerHandler.java:86)
+	at org.apache.mina.common.support.AbstractIoFilterChain$TailFilter.sessionClosed(AbstractIoFilterChain.java:550)
+	at org.apache.mina.common.support.AbstractIoFilterChain.callNextSessionClosed(AbstractIoFilterChain.java:269)
+	at org.apache.mina.common.support.AbstractIoFilterChain.access$800(AbstractIoFilterChain.java:53)
+	at org.apache.mina.common.support.AbstractIoFilterChain$EntryImpl$1.sessionClosed(AbstractIoFilterChain.java:633)
+	at org.apache.mina.filter.codec.ProtocolCodecFilter.sessionClosed(ProtocolCodecFilter.java:254)
+	at org.apache.mina.common.support.AbstractIoFilterChain.callNextSessionClosed(AbstractIoFilterChain.java:269)
+	at org.apache.mina.common.support.AbstractIoFilterChain.access$800(AbstractIoFilterChain.java:53)
+	at org.apache.mina.common.support.AbstractIoFilterChain$EntryImpl$1.sessionClosed(AbstractIoFilterChain.java:633)
+	at org.apache.mina.filter.executor.ExecutorFilter.processEvent(ExecutorFilter.java:230)
+	at org.apache.mina.filter.executor.ExecutorFilter$ProcessEventsRunnable.run(ExecutorFilter.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.mina.util.NamePreservingRunnable.run(NamePreservingRunnable.java:51)
+	at java.lang.Thread.run(Unknown Source)
+
+---------------------------------

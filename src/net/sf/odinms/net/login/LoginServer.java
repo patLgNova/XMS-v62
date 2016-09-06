@@ -145,8 +145,8 @@ public class LoginServer implements Runnable, LoginServerMBean {
                         DatabaseConnection.getConnection();
                         prop = wli.getWorldProperties();
                         userLimit = Integer.parseInt(prop.getProperty("net.sf.odinms.login.userlimit", "150"));
-                        serverName = prop.getProperty("net.sf.odinms.world.serverName", "XiuzSource");
-                        eventMessage = prop.getProperty("net.sf.odinms.login.eventMessage", "XiuzSource");
+                        serverName = prop.getProperty("net.sf.odinms.world.serverName", "AeroStory");
+                        eventMessage = prop.getProperty("net.sf.odinms.login.eventMessage", "AeroStory");
                         flag = Integer.parseInt(prop.getProperty("net.sf.odinms.login.flag", "0"));
                         maxCharacters = Integer.parseInt(prop.getProperty("net.sf.odinms.login.maxCharacters", "6"));
                         serverCheck = Boolean.parseBoolean(prop.getProperty("net.sf.odinms.login.serverCheck", "false"));
@@ -192,8 +192,8 @@ public class LoginServer implements Runnable, LoginServerMBean {
             DatabaseConnection.getConnection();
             prop = wli.getWorldProperties();
             userLimit = Integer.parseInt(prop.getProperty("net.sf.odinms.login.userlimit", "150"));
-            serverName = prop.getProperty("net.sf.odinms.world.serverName", "XiuzSource");
-            eventMessage = prop.getProperty("net.sf.odinms.login.eventMessage", "XiuzSource");
+            serverName = prop.getProperty("net.sf.odinms.world.serverName", "AeroStory");
+            eventMessage = prop.getProperty("net.sf.odinms.login.eventMessage", "AeroStory");
             flag = Integer.parseInt(prop.getProperty("net.sf.odinms.login.flag", "0"));
             maxCharacters = Integer.parseInt(prop.getProperty("net.sf.odinms.login.maxCharacters", "6"));
             serverCheck = Boolean.parseBoolean(prop.getProperty("net.sf.odinms.login.serverCheck", "false"));

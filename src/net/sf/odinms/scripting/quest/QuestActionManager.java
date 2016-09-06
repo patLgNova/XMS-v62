@@ -1,17 +1,40 @@
+/*
+	This file is part of the OdinMS Maple Story Server
+    Copyright (C) 2008 Patrick Huy <patrick.huy@frz.cc>
+		       Matthias Butz <matze@odinms.de>
+		       Jan Christian Meyer <vimes@odinms.de>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation version 3 as published by
+    the Free Software Foundation. You may not use, modify or distribute
+    this program under any other version of the GNU Affero General Public
+    License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 package net.sf.odinms.scripting.quest;
 
 import net.sf.odinms.client.MapleClient;
-import net.sf.odinms.client.MapleQuestStatus.Status;
 import net.sf.odinms.scripting.npc.NPCConversationManager;
 import net.sf.odinms.server.quest.MapleQuest;
 
+/**
+ *
+ * @author RMZero213
+ */
 public class QuestActionManager extends NPCConversationManager {
-
-    private boolean start;
+    private boolean start; // this is if the script in question is start or end
     private int quest;
 
-    public QuestActionManager(MapleClient c, int npc, int quest, boolean start) {
-        super(c, npc, null, null);
+    public QuestActionManager(MapleClient c, int quest, int npc, boolean start) {
+        super(c, npc, null);
         this.quest = quest;
         this.start = start;
     }
@@ -29,27 +52,29 @@ public class QuestActionManager extends NPCConversationManager {
         QuestScriptManager.getInstance().dispose(this, getClient());
     }
 
-    public void forceStartQuest() {
-        if (getQuestStatus(quest) != Status.COMPLETED) {
-            forceStartQuest(quest);
-        } else {
-            dispose();
-        }
+    public boolean forceStartQuest() {
+        return forceStartQuest(quest);
     }
 
-    public void forceStartQuest(int id) {
-        if (getQuestStatus(id) != Status.COMPLETED) {
-            MapleQuest.getInstance(id).forceStart(getPlayer(), getNpc());
-        } else {
-            dispose();
-        }
+    public boolean forceStartQuest(int id) {
+        return MapleQuest.getInstance(id).forceStart(getPlayer(), getNpc());
     }
 
-    public void forceCompleteQuest() {
-            forceCompleteQuest(quest);
+    public boolean forceCompleteQuest() {
+        return forceCompleteQuest(quest);
+    }
+    
+    // For compatability with some older scripts...
+    public void startQuest() {
+        forceStartQuest();
+    }
+    
+    // For compatability with some older scripts...
+    public void completeQuest() {
+        forceCompleteQuest();
     }
 
-    public void forceCompleteQuest(int id) {
-            MapleQuest.getInstance(id).forceComplete(getPlayer(), getNpc());
+    public boolean forceCompleteQuest(int id) {
+        return MapleQuest.getInstance(id).forceComplete(getPlayer(), getNpc());
     }
 }

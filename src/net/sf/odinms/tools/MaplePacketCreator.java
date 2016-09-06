@@ -2740,7 +2740,39 @@ public class MaplePacketCreator {
 
         return mplew.getPacket();
     }
+    public static MaplePacket completeQuest(short quest, long time) {
+		 final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+		 mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
+		 mplew.write(1);
+		 mplew.writeShort(quest);
+		 mplew.write(2);
+		 mplew.writeLong(time);
+		 return mplew.getPacket();
+	 }
+    public static MaplePacket updateQuest(MapleQuestStatus q, boolean infoUpdate) {
+		 final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+		 mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
+		 mplew.write(1);
+		 mplew.writeShort(infoUpdate ? q.getQuest().getInfoNumber() : q.getQuest().getId());
+		 if (infoUpdate) {
+			 mplew.write(1);
+		 } else {
+			 mplew.write(q.getStatus().getId());
+		 }
 
+		 mplew.writeMapleAsciiString(q.getQuestData());
+		 return mplew.getPacket();
+	 }
+
+     public static MaplePacket updateQuestInfo(short quest, int npc) {
+		 final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+		 mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
+		 mplew.write(8); //0x0A in v95
+		 mplew.writeShort(quest);
+		 mplew.writeInt(npc);
+		 mplew.writeInt(0);
+		 return mplew.getPacket();
+	 }
     /**
      * 
      * @param c
@@ -2749,19 +2781,6 @@ public class MaplePacketCreator {
      * @param progress
      * @return
      */
-    // frz note, 0.52 transition: this is only used when starting a quest and
-    // seems to have no effect, is it needed?
-    public static MaplePacket updateQuestInfo(MapleCharacter c, short quest, int npc, byte progress) {
-        // [A5 00] [08] [69 08] [86 71 0F 00] [00 00 00 00]
-        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-
-        mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
-        mplew.write(progress);
-        mplew.writeShort(quest);
-        mplew.writeInt(npc);
-        mplew.writeInt(0);
-        return mplew.getPacket();
-    }
 
     private static <E extends LongValueHolder> long getLongMask(List<Pair<E, Integer>> statups) {
         long mask = 0;
@@ -3251,25 +3270,99 @@ public class MaplePacketCreator {
         return mplew.getPacket();
     }
 
-    public static MaplePacket updateQuestMobKills(MapleQuestStatus status) {
-        // 21 00 01 FB 03 01 03 00 30 30 31
-        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+//    public static MaplePacket updateQuestMobKills(MapleQuestStatus status) {
+//        // 21 00 01 FB 03 01 03 00 30 30 31
+//        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+//
+//        mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
+//        mplew.write(1);
+//        mplew.writeShort(status.getQuest().getId());
+//        mplew.write(1);
+//        String killStr = "";
+//        for (int kills : status.getMobKills().values()) {
+//            killStr += StringUtil.getLeftPaddedStr(String.valueOf(kills), '0', 3);
+//        }
+//        mplew.writeMapleAsciiString(killStr);
+//        mplew.writeInt(0);
+//        mplew.writeInt(0);
+//
+//        return mplew.getPacket();
+//    }
+           public static MaplePacket updateQuestFinish(short quest, int npc, short nextquest) { //Check
+				   final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+				   mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue()); //0xF2 in v95
+				   mplew.write(8);//0x0A in v95
+				   mplew.writeShort(quest);
+				   mplew.writeInt(npc);
+				   mplew.writeShort(nextquest);
+				   return mplew.getPacket();
+			   }
+           
+           
+             public static MaplePacket questError(short quest) {
+				   final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+				   mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
+				   mplew.write(0x0A);
+				   mplew.writeShort(quest);
+				   return mplew.getPacket();
+			   }
 
-        mplew.writeShort(SendPacketOpcode.SHOW_STATUS_INFO.getValue());
-        mplew.write(1);
-        mplew.writeShort(status.getQuest().getId());
-        mplew.write(1);
-        String killStr = "";
-        for (int kills : status.getMobKills().values()) {
-            killStr += StringUtil.getLeftPaddedStr(String.valueOf(kills), '0', 3);
-        }
-        mplew.writeMapleAsciiString(killStr);
-        mplew.writeInt(0);
-        mplew.writeInt(0);
+			   public static MaplePacket questFailure(byte type) {
+				   final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+				   mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
+				   mplew.write(type);//0x0B = No meso, 0x0D = Worn by character, 0x0E = Not having the item ?
+				   return mplew.getPacket();
+			   }
 
-        return mplew.getPacket();
+			    public static MaplePacket questExpire(short quest) {
+				   final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+				   mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
+				   mplew.write(0x0F);
+				   mplew.writeShort(quest);
+				   return mplew.getPacket();
+			   }
+    public static MaplePacket showQuestComplete() {
+        return showSpecialEffect(9);
     }
 
+    /**
+     * 6 = Exp did not drop (Safety Charms)
+     * 7 = Enter portal sound
+     * 8 = Job change
+     * 9 = Quest complete
+     * 10 = damage O.O
+     * 14 = Monster book pickup
+     * 15 = Equipment levelup
+     * 16 = Maker Skill Success
+     * 19 = Exp card [500, 200, 50]
+     * @param effect
+     * @return 
+     */
+    public static MaplePacket showSpecialEffect(int effect) {
+        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+        mplew.writeShort(SendPacketOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
+        mplew.write(effect);
+        return mplew.getPacket();
+    }
+    public static MaplePacket removeQuestTimeLimit(final short quest) {
+		 final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+		 mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
+		 mplew.write(7);
+		 mplew.writeShort(1);//Position
+		 mplew.writeShort(quest);
+		 return mplew.getPacket();
+	 }
+
+
+                 public static MaplePacket addQuestTimeLimit(final short quest, final int time) {
+		 final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+		 mplew.writeShort(SendPacketOpcode.UPDATE_QUEST_INFO.getValue());
+		 mplew.write(6);
+		 mplew.writeShort(1);//Size but meh, when will there be 2 at the same time? And it won't even replace the old one :)
+		 mplew.writeShort(quest);
+		 mplew.writeInt(time);
+		 return mplew.getPacket();
+	 }
     public static MaplePacket getShowQuestCompletion(int id) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
 
@@ -5812,7 +5905,7 @@ public class MaplePacketCreator {
         mplew.write(item.getType()); // 1 show / 0 disapear ? o________o
         mplew.writeShort(item.getPosition()); // update this slot ?
         addItemInfo(mplew, item, true, true);
-        mplew.writeMapleAsciiString("XiuzSource");
+        mplew.writeMapleAsciiString("AeroStory");
         return mplew.getPacket();
     }
 

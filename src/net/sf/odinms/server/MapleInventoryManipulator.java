@@ -13,6 +13,7 @@ import net.sf.odinms.client.MapleCharacter;
 import net.sf.odinms.client.MapleClient;
 import net.sf.odinms.client.MapleInventoryType;
 import net.sf.odinms.client.constants.Enums;
+import net.sf.odinms.client.constants.ItemConstants;
 import net.sf.odinms.tools.MaplePacketCreator;
 import net.sf.odinms.tools.logging.LogSystem;
 
@@ -52,6 +53,12 @@ public class MapleInventoryManipulator {
                         + "["+sdf2.format(System.currentTimeMillis()) +"]Player attempted to add an illegal quantity of: " + quantity + "\n");
             //AutobanManager.getInstance().autoban(c.getPlayer().getClient(), "XSource| PE Item: " + quantity + "x " + itemId);
             return false;
+        }
+        if (ItemConstants.trackedItems(itemId)) {
+        LogSystem.printLog(LogSystem.ItemTracker + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player gained a tracked item.\nItemID: " + itemId + 
+                "\nQuantity: " + quantity + ".\n");
         }
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
         MapleInventoryType type = ii.getInventoryType(itemId);
@@ -124,7 +131,11 @@ public class MapleInventoryManipulator {
                 }
                 c.getSession().write(MaplePacketCreator.addInventorySlot(type, nEquip));
             } else {
-                throw new InventoryException("Trying to create equip with non-one quantity");
+            LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player tried to create an equip with a quantity that wasn't 1."
+                        + "\nItemID: " + itemId + "\nQuantity: " + quantity + "\n");
+            return false;
             }
         }
         return true;
@@ -147,6 +158,23 @@ public class MapleInventoryManipulator {
             return false;
         }
         short quantity = item.getQuantity();
+        if (ItemConstants.trackedItems(item.getItemId())) {
+        LogSystem.printLog(LogSystem.ItemTracker + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player gained a tracked item.\nItemID: " + item.getItemId() + 
+                "\nQuantity: " + quantity + ".\n");
+        }
+        if(item.getItemId() == 4031530) {
+            c.getPlayer().modifyCSPoints(1, 100);
+            c.getSession().write(MaplePacketCreator.enableActions());
+            c.getSession().write(MaplePacketCreator.serverNotice(6, "You have gained 100 NX cash"));
+            return true;
+        } else if (item.getItemId() == 4031531) {
+            c.getPlayer().modifyCSPoints(1, 250);
+            c.getSession().write(MaplePacketCreator.enableActions());
+            c.getSession().write(MaplePacketCreator.serverNotice(6, "You have gained 250 NX cash"));
+            return true;
+        }
         if (quantity >= 4000 || quantity < 0) {
             LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() +".txt",  "["+sdf.format(System.currentTimeMillis())+"]"
                         + "["+sdf2.format(System.currentTimeMillis()) +"]Player attempted to add an illegal quantity of: " + quantity + "\n");
@@ -209,7 +237,11 @@ public class MapleInventoryManipulator {
                 }
                 c.getSession().write(MaplePacketCreator.addInventorySlot(type, item, true));
             } else {
-                throw new RuntimeException("Trying to create equip with non-one quantity");
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player tried to create an equip with a quantity that wasn't 1."
+                        + "\nItemID: " + item.getItemId() + "\nQuantity: " + item.getQuantity() + "\n");
+            return false;
             }
         }
         if (owner != null) {
@@ -248,7 +280,9 @@ public class MapleInventoryManipulator {
                 numSlotsNeeded = 1;
             } else {
                 numSlotsNeeded = 1;
-                System.out.println("Error - 0 slotMax.");
+                LogSystem.printLog(LogSystem.Cheaters + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player caused an error. 0 slotMax.\n");
             }
             return !c.getPlayer().getInventory(type).isFull(numSlotsNeeded - 1);
         } else {
@@ -315,6 +349,12 @@ public class MapleInventoryManipulator {
         IItem initialTarget = c.getPlayer().getInventory(type).getItem(dst);
         if (source == null) {
             return;
+        }
+        if (ItemConstants.trackedItems(source.getItemId())) {
+        LogSystem.printLog(LogSystem.ItemTracker + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player gained a tracked item.\nItemID: " + source.getItemId() + 
+                "\nQuantity: " + source.getQuantity() + ".\n");
         }
         short olddstQ = -1;
         if (initialTarget != null) {
@@ -473,6 +513,12 @@ public class MapleInventoryManipulator {
         }
         IItem source = c.getPlayer().getInventory(type).getItem(src);
         int itemId = source.getItemId();
+        if (ItemConstants.trackedItems(source.getItemId())) {
+        LogSystem.printLog(LogSystem.ItemTracker + c.getPlayer().getName() + ".txt", 
+                "["+sdf.format(System.currentTimeMillis())+"]" +
+                "["+sdf2.format(System.currentTimeMillis()) +"]Player gained a tracked item.\nItemID: " + source.getItemId() + 
+                "\nQuantity: " + source.getQuantity() + ".\n");
+        }
         if (c.getPlayer().getItemEffect() == itemId && source.getQuantity() == 1) {
             c.getPlayer().setItemEffect(0);
             c.getPlayer().getMap().broadcastMessage(MaplePacketCreator.itemEffect(c.getPlayer().getId(), 0));

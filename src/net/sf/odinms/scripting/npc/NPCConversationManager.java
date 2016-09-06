@@ -49,7 +49,12 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
     private String fileName = null;
     private String getText;
     private MapleCharacter chr;
-
+    public NPCConversationManager(MapleClient c, int npc, MapleCharacter chr) {
+	super(c);
+	this.c = c;
+	this.npc = npc;
+	this.chr = chr;
+    }
     public NPCConversationManager(MapleClient c, int npc, MapleCharacter chr, String fileName) {
         super(c);
         this.c = c;
@@ -128,17 +133,33 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
         return getPlayer().getJob();
     }
 
-    public void startQuest(int id) {
-        MapleQuest.getInstance(id).start(getPlayer(), npc);
-    }
+        public void startQuest(short id) {
+		try {
+			MapleQuest.getInstance(id).forceStart(getPlayer(), npc);
+		} catch (NullPointerException ex) {
+		}
+	}
 
-    public void completeQuest(int id) {
-        MapleQuest.getInstance(id).complete(getPlayer(), npc);
-    }
+	public void completeQuest(short id) {
+		try {
+			MapleQuest.getInstance(id).forceComplete(getPlayer(), npc);
+		} catch (NullPointerException ex) {
+		}
+	}
 
-    public void forfeitQuest(int id) {
-        MapleQuest.getInstance(id).forfeit(getPlayer());
-    }
+	public void startQuest(int id) {
+		try {
+			MapleQuest.getInstance(id).forceStart(getPlayer(), npc);
+		} catch (NullPointerException ex) {
+		}
+	}
+
+	public void completeQuest(int id) {
+		try {
+			MapleQuest.getInstance(id).forceComplete(getPlayer(), npc);
+		} catch (NullPointerException ex) {
+		}
+	}
 
     /**
      * use getPlayer().getMeso() instead

@@ -3,20 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/login/LoginServer.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/login/handler/DeleteCharHandler.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/login/handler/LoginPasswordHandler.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/server/MapleInventoryManipulator.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/login/handler/CreateCharHandler.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/channel/ChannelServer.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/client/MapleClient.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/client/Equip.java</file>
             <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/client/constants/ItemConstants.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/client/constants/Enums.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/channel/handler/ScrollHandler.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/net/channel/handler/ItemMoveHandler.java</file>
+            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/server/MapleInventoryManipulator.java</file>
             <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/tools/logging/LogSystem.java</file>
-            <file>file:/C:/Users/Patrick/Desktop/XiuzSource/src/net/sf/odinms/client/IItem.java</file>
         </group>
     </open-files>
 </project-private>

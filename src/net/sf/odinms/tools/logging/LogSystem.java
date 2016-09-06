@@ -10,7 +10,14 @@ import java.util.Calendar;
 
 public class LogSystem {
 
-    public static final String 
+    public static final String
+            /*Used*/
+            GMLog = "GMLog/",
+            Login = "Login/",
+            Cheaters = "Cheaters/",
+            LevelUp = "Levelup/",
+            ItemTracker = "ItemTracker/",
+            /*Unused*/
             ACCOUNT_STUCK = "accountStuck.txt",
             EXCEPTION_CAUGHT = "exceptionCaught.txt",
             CLIENT_START = "clientStartError.txt",
@@ -28,14 +35,9 @@ public class LogSystem {
             NPC = "npcs/",
             SpecialMoveHandler = "SpecialMoveHandler/",
             NPCe = "npcsE/",
-            GMLog = "GMLog/",
             Damage = "Damage/",
-            Login = "Login/",
-            Cheaters = "Cheaters/",
-            TrackedItems = "trackedItems/",
             TrackedDLogin = "Dlogin/",
             MoreTalkLog = "MoreTalkLog/",
-            LevelUp = "Levelup/",
             Bosses = "BossKills/",
             INVOCABLE = "invocable/",
             REACTOR = "reactors/",

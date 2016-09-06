@@ -57,6 +57,7 @@ import net.sf.odinms.server.maps.FakeCharacter;
 import net.sf.odinms.server.maps.MapleMapFactory;
 import net.sf.odinms.server.maps.MapleMapObject;
 import net.sf.odinms.server.maps.MapleMapObjectType;
+import net.sf.odinms.server.quest.MapleQuest;
 import net.sf.odinms.tools.MaplePacketCreator;
 import org.apache.mina.common.ByteBuffer;
 import org.apache.mina.common.CloseFuture;
@@ -250,6 +251,7 @@ public class ChannelServer implements Runnable, ChannelServerMBean {
         TimerManager tMan = TimerManager.getInstance();
         tMan.start();
         tMan.register(AutobanManager.getInstance(), 60000);
+        MapleQuest.loadAllQuest();
         try {
             MapleServerHandler serverHandler = new MapleServerHandler(PacketProcessor.getProcessor(PacketProcessor.Mode.CHANNELSERVER), channel);
             acceptor.bind(new InetSocketAddress(port), serverHandler, cfg);

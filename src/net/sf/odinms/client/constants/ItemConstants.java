@@ -20,6 +20,8 @@ public static boolean trackedItems(int itemid){
         case 2049100:
         case 2022179:
         case 5222000:
+        case 2022282:
+        case 2043003:
             return true;
     }
     return false;
@@ -42,5 +44,15 @@ public static boolean isRechargable(int itemId) {
         }
         return MapleInventoryType.getByType(type);
     }
+    public final static int PET_COME = 0x80;
+    public final static int ACCOUNT_SHARING = 0x100;
     
+    public static int getFlagByInt(int type) {
+        if (type == 128) {
+            return PET_COME;
+        } else if (type == 256) {
+            return ACCOUNT_SHARING;
+        }
+        return 0;
+    }    
 }

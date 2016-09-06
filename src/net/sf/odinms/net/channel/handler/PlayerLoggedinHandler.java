@@ -165,11 +165,6 @@ public class PlayerLoggedinHandler extends AbstractMaplePacketHandler {
         }
         player.updatePartyMemberHP();
         player.sendKeymap();
-        for (MapleQuestStatus status : player.getStartedQuests()) {
-            if (status.hasMobKills()) {
-                c.getSession().write(MaplePacketCreator.updateQuestMobKills(status));
-            }
-        }
         CharacterNameAndId pendingBuddyRequest = player.getBuddylist().pollPendingRequest();
         if (pendingBuddyRequest != null) {
             player.getBuddylist().put(new BuddylistEntry(pendingBuddyRequest.getName(), pendingBuddyRequest.getId(), -1, false));

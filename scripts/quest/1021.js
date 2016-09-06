@@ -55,7 +55,7 @@ function end(mode, type, selection) {
 		} else if (status == 2) {
 			qm.sendNextPrev("Okay, this is all I can teach you. I know it's sad but it is time to say good bye. Well take care if yourself and Good luck my friend!\r\n\r\n#fUI/UIWindow.img/QuestIcon/4/0#\r\n#v2010000# 3 #t2010000#\r\n#v2010009# 3 #t2010009#\r\n\r\n#fUI/UIWindow.img/QuestIcon/8/0# 10 exp");
 		} else if (status == 3) {
-			qm.forceCompleteQuest();
+			qm.completeQuest();
 			qm.gainExp(10);
 			qm.gainItem(2010000, 3);
 			qm.gainItem(2010009, 3);

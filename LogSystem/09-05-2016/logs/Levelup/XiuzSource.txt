@@ -1,0 +1,9 @@
+[09-05-2016][13:08:31]Reached level 121 on MapID 120000103.
+[09-05-2016][13:31:14]Reached level 2 on MapID 2.
+[09-05-2016][13:32:59]Reached level 3 on MapID 2.
+[09-05-2016][13:33:02]Reached level 4 on MapID 2.
+[09-05-2016][13:33:11]Reached level 5 on MapID 2.
+[09-05-2016][13:39:29]Reached level 6 on MapID 2.
+[09-05-2016][13:43:39]Reached level 7 on MapID 120000103.
+[09-05-2016][13:44:06]Reached level 8 on MapID 2.
+[09-05-2016][13:44:54]Reached level 41 on MapID 2.
